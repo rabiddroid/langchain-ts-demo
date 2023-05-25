@@ -28,7 +28,9 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "langchain": "^0.0.39",
+    "hnswlib-node": "^1.4.2",
+    "langchain": "^0.0.82",
+    "pdf-parse": "^1.1.1",
     "tsup": "^6.7.0"
   },
   "devDependencies": {
