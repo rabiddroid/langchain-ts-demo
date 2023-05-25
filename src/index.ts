@@ -18,6 +18,7 @@ export const run = async () => {
   new OpenAI({
     modelName: MODEL_NAME,
     openAIApiKey: process.env.OPENAI_API_KEY,
+    cache: true,
   });
 
 
