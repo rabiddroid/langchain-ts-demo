@@ -4,9 +4,11 @@ import { HNSWLib } from "langchain/vectorstores/hnswlib";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { RetrievalQAChain } from "langchain/chains";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
+import { prompt } from './prompt.ts';
 
 dotenv.config();
 
+const MODEL_NAME = "text-davinci-003";// "gpt-3.5-turbo";
 
 
 
@@ -14,7 +16,7 @@ export const run = async () => {
   // Initialize the LLM to use to answer the question.
   const model = 
   new OpenAI({
-    modelName: "gpt-3.5-turbo",
+    modelName: MODEL_NAME,
     openAIApiKey: process.env.OPENAI_API_KEY,
   });
 
@@ -32,9 +34,14 @@ export const run = async () => {
 
   // Create a chain that uses the OpenAI LLM and HNSWLib vector store.
   const chain = RetrievalQAChain.fromLLM(model, vectorStore.asRetriever());
+
+
+  const question = await prompt('What is your question about the game - Risk?\n');
+  
   const res = await chain.call({
-    query: "Can you give me an example of the first turn?",
+    query: question,
   });
+
   console.log({ res });
 
 };
