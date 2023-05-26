@@ -22,13 +22,10 @@ export const run = async () => {
     });
 
 
+  // splitpages helps or we go over token limits
   const loader = new PDFLoader("/Users/jeffrey.thomas/Development/personal/langchain-ts-demo/resources/Risk-Wiki.pdf", { splitPages: true });
-  // Load one document per file
   const docs = await loader.load();
 
-  // const text = fs.readFileSync("state_of_the_union.txt", "utf8");
-  // const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000 });
-  // const docs = await textSplitter.createDocuments([text]);
 
   // Create a vector store from the documents.
   const vectorStore = await HNSWLib.fromDocuments(docs, new OpenAIEmbeddings());
