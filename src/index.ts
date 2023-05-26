@@ -9,7 +9,8 @@ import { prompt } from './prompt.ts';
 dotenv.config();
 
 const MODEL_NAME = "text-davinci-003";// "gpt-3.5-turbo";
-
+// Save the vector store to a directory
+const vectorStoreDirectory = "/Users/jeffrey.thomas/Development/personal/langchain-ts-demo/vector-store-db";
 
 
 export const run = async () => {
@@ -21,21 +22,25 @@ export const run = async () => {
       cache: true,
     });
 
+  // args.json file required in vectorStoreDirectory since we are creating the instance from a directory
+  const loadedVectorStore = await HNSWLib.load(vectorStoreDirectory, new OpenAIEmbeddings());
 
   // splitpages helps or we go over token limits
-  const loader = new PDFLoader("/Users/jeffrey.thomas/Development/personal/langchain-ts-demo/resources/Risk-Wiki.pdf", { splitPages: true });
-  const docs = await loader.load();
+  const loader1 = new PDFLoader("/Users/jeffrey.thomas/Development/personal/langchain-ts-demo/resources/Risk-Wiki.pdf", { splitPages: true });
+  const docs = await loader1.load();
+  const loader2 = new PDFLoader("/Users/jeffrey.thomas/Development/personal/langchain-ts-demo/resources/Risk-Hashbro.pdf", { splitPages: true });
+  const docs2 = await loader2.load();
 
 
   // Create a vector store from the documents.
-  const vectorStore = await HNSWLib.fromDocuments(docs, new OpenAIEmbeddings());
+  loadedVectorStore.addDocuments(docs);
+  loadedVectorStore.addDocuments(docs2);
+  loadedVectorStore.save(vectorStoreDirectory);
 
   // Create a chain that uses the OpenAI LLM and HNSWLib vector store.
-  const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever());
+  const chain = ConversationalRetrievalQAChain.fromLLM(model, loadedVectorStore.asRetriever());
 
   await answerQuestion(chain);
-
-
 
 };
 
