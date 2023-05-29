@@ -3,7 +3,7 @@ import { OpenAI } from "langchain/llms/openai";
 import { BaseChain, ConversationalRetrievalQAChain } from "langchain/chains";
 
 import { prompt } from './prompt.ts';
-import { informationVectorStore } from "./information-index.ts";
+import { loadInformationVectorStore } from "./information-index.ts";
 
 dotenv.config();
 
@@ -21,7 +21,7 @@ export const run = async () => {
     });
 
 
-  const loadedVectorStore = await informationVectorStore();
+  const loadedVectorStore = await loadInformationVectorStore();
   // Create a chain that uses the OpenAI LLM and HNSWLib vector store.
   const chain = ConversationalRetrievalQAChain.fromLLM(model, loadedVectorStore.asRetriever());
 

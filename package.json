@@ -11,6 +11,7 @@
     "tsup": "tsup",
     "build": "tsup",
     "start": "tsx -r dotenv/config src/index.ts",
+    "create-vector-store": "tsx -r dotenv/config src/create-information-index.ts",
     "lint": "eslint src",
     "lint:fix": "npm run lint --fix",
     "format": "prettier --write \"**/*.ts\"",
