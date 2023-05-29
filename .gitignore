@@ -3,4 +3,3 @@ node_modules
 dist
 .turbo
 vector-store-db/*
-!vector-store-db/args.json

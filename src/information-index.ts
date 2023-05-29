@@ -3,12 +3,6 @@ import { HNSWLib } from "langchain/vectorstores/hnswlib";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 
 
-
-
-
-
-
-
 export const loadInformationVectorStore = async () => {
     
     if (!process.env.VECTOR_STORE_DIRECTORY) {
