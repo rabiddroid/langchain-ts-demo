@@ -12,10 +12,14 @@ ask questions about the game.
 - `tsup` to bundle Typescript code
 - `tsx` to quickly run compiled code
 
-# How to use
-
+# Setup
+- rename file `.env.example` to `.env`
+- Get an OPEN AI [developer key](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key) and set the value in file `.env`
 - `npm install`
 - `npm run create-vector-store` To run first time or every time you have new data to ingest. Files from ./resources folder are ingested.
+
+# How to use
+
 - `npm start` to run the app.
 - Typing `quit` will exit the app.
 
