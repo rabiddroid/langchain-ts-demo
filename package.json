@@ -11,6 +11,7 @@
     "tsup": "tsup",
     "build": "tsup",
     "start": "tsx -r dotenv/config src/index.ts",
+    "create-vector-store": "tsx -r dotenv/config src/create-information-index.ts",
     "lint": "eslint src",
     "lint:fix": "npm run lint --fix",
     "format": "prettier --write \"**/*.ts\"",
@@ -28,13 +29,15 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "langchain": "^0.0.39",
+    "hnswlib-node": "^1.4.2",
+    "langchain": "^0.0.82",
+    "pdf-parse": "^1.1.1",
     "tsup": "^6.7.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.2",
     "@types/js-yaml": "^4",
-    "@types/node": "^18.15.5",
+    "@types/node": "^18.16.15",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "eslint": "^8.33.0",
